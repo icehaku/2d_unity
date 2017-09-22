@@ -1,0 +1,49 @@
+
+    void Update()
+    {
+        //MY DASH--------------------------------------------------------------
+        if (Input.GetKeyDown(right) || Input.GetKeyDown(left))
+        {
+            bool pressedRight = Input.GetKeyDown(right);
+            
+            //keep dash direction
+            last_taps[1] = last_taps[0];
+            last_taps[0] = pressedRight ? "right" : "left";
+
+            //dash
+            if (dashReady && (Time.time - lastTapTime) < tapReload && (last_taps[0] == last_taps[1]))
+            {
+                anim.SetTrigger("dashing");
+                trow_snd.Play();
+                
+                dashSpeed = 2f;
+                
+                dashReady = false;
+                StartCoroutine(dashReloadRoutine());
+            }
+            lastTapTime = Time.time;
+
+            //controles
+            if(pressedRight)
+                theRB.velocity = new Vector2( moveSpeed * dashSpeed, theRB.velocity.y);
+            else
+                theRB.velocity = new Vector2(-moveSpeed * dashSpeed, theRB.velocity.y);
+        }
+        else
+        {
+            //removendo a desaceleracao do player e parando instantaneo;
+            //Caso queria que o boneco pare aos poucos, remover o bloco abaixo
+            theRB.velocity = new Vector2(0, theRB.velocity.y);
+            dashSpeed = 1f;
+        }
+
+
+		//revert_position
+        if (theRB.velocity.x < 0 && transform.localScale.x > -1)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (theRB.velocity.x > 0 && transform.localScale.x < 1)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
