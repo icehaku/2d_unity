@@ -6,6 +6,7 @@ TagManager:
   tags:
   - player1_tag
   - player2_tag
+  - pegavel
   layers:
   - Default
   - TransparentFX

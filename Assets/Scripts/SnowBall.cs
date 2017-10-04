@@ -5,6 +5,7 @@ using UnityEngine;
 public class SnowBall : MonoBehaviour {
 
     public float speed;
+    public string shooter;
     private Rigidbody2D theRB;
     public GameObject snowBallEffect;
 

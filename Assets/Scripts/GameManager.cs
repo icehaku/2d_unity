@@ -49,10 +49,6 @@ public class GameManager : MonoBehaviour {
         {
             SceneManager.LoadScene(main_menu);
         }
-
-        //if (p1_wins.activeSelf || p2_wins.activeSelf)
-        //{
-        //}
     }
 
     public void damage_p1()
